@@ -38,7 +38,7 @@ public class EggCartonNode implements Node, Comparable<EggCartonNode>{
 	private ArrayList<EggCartonNode> getNeighbours() {
 		if(neighbours==null) { // If the neighbours is not generated yet, we must do so.
 			
-			// I generate neighnours by changing the state of one cell in the carton
+			// I generate each new neighbour by changing the state of one cell in the carton
 			for(int n=0;n<N;n++) {
 				for(int m=0;m<M;m++) {
 					boolean[][] newEggCarton = eggCarton;
@@ -51,8 +51,19 @@ public class EggCartonNode implements Node, Comparable<EggCartonNode>{
 	}
 	
 	private double calculateObjectiveFunction() { // This calculates the F(P), where P=this
+		int numberOfEggs = 0;
+		for(int n=0;n<N;n++) for(int m=0;m<M;m++) if(eggCarton[m][n])numberOfEggs++; // Counts the eggs
+		
+		int numberOfErrors = 0;
+		//Horizontally error count
+		for(int n=0;n<N;n++) {
+			int numberOfEggsInRow = 0;
+			for(int m=0;m<M;m++) {
+				
+			}
+		}
+		
 		return 0;
-		// TODO make the objective function
 	}	
 	
 	public static EggCartonNode getP() { // This generates a startingpoint for SA
