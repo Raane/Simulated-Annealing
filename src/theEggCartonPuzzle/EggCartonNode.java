@@ -30,10 +30,22 @@ public class EggCartonNode implements Node, Comparable<EggCartonNode>{
 			}
 		}
 	}
-	
+
+	public EggCartonNode(boolean[][] eggCarton) {
+		this.eggCarton = eggCarton;
+	}
+
 	private ArrayList<EggCartonNode> getNeighbours() {
-		if(neighbours==null) {
-			//TODO Find neighbours
+		if(neighbours==null) { // If the neighbours is not generated yet, we must do so.
+			
+			// I generate neighnours by changing the state of one cell in the carton
+			for(int n=0;n<N;n++) {
+				for(int m=0;m<M;m++) {
+					boolean[][] newEggCarton = eggCarton;
+					newEggCarton[m][n] = eggCarton[m][n];
+					neighbours.add(new EggCartonNode(newEggCarton));
+				}
+			}
 		}
 		return neighbours;
 	}
