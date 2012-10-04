@@ -8,7 +8,9 @@ public interface Node extends Comparable{
 
 	public double getObjectiveFunction(); // This is the objective function of the nodes
 
-	public ArrayList<Node> getNeighbours();
-	
 	public Node getBestNeighbour();
+
+	public double getTarget();
+
+	public Node getRandomNeighbour();
 }
