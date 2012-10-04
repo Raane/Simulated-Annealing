@@ -83,6 +83,22 @@ public class EggCartonNode implements Node, Comparable<EggCartonNode>{
 		return compareTo((EggCartonNode)(otherNode));
 	}
 	
+	@Override
+	public String toString() {
+		String carton = "+";
+		for(int m=0;m<M;m++) carton += "-";
+		carton += "+";
+		for(int n=0;n<N;n++) {
+			carton += "| " + System.getProperty("line.separator");
+			for(int m=0;m<M;m++) carton+= (eggCarton[m][n])?"o ":"x ";
+			carton += "|";
+		}
+		carton = "+";
+		for(int m=0;m<M;m++) carton += "-";
+		carton += "+";
+		return carton;
+	}
+	
 	public static void main(String[] args) {
 		SimulatedAnnealing sa = new SimulatedAnnealing(getP(), T_MAX, DT);
 		System.out.println(sa.solve());
