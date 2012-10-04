@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import generalSimulatedAnnealing.Node;
+import generalSimulatedAnnealing.SimulatedAnnealing;
 
 public class EggCartonNode implements Node, Comparable<EggCartonNode>{
 
@@ -12,6 +13,9 @@ public class EggCartonNode implements Node, Comparable<EggCartonNode>{
 	private EggCartonNode bestNode = null;
 	private Double objectiveFunction = null;
 	private boolean[][] eggCarton = new boolean[M][N];
+	
+	private static final int STEPS = 50000; 				// This limits how many steps the program is willying to search.
+	private static final double T_MAX = 1, DT = T_MAX/STEPS;// This is the starting maximum temperature.
 	
 	public EggCartonNode() {
 		for(int n=0;n<N;n++) {	
@@ -34,12 +38,12 @@ public class EggCartonNode implements Node, Comparable<EggCartonNode>{
 		return neighbours;
 	}
 	
-	private double calculateObjectiveFunction() {
+	private double calculateObjectiveFunction() { // This calculates the F(P), where P=this
 		return 0;
 		// TODO make the objective function
 	}	
 	
-	public static EggCartonNode getP() {
+	public static EggCartonNode getP() { // This generates a startingpoint for SA
 		return new EggCartonNode();
 	}
 	
@@ -77,5 +81,10 @@ public class EggCartonNode implements Node, Comparable<EggCartonNode>{
 	@Override
 	public int compareTo(Node otherNode) {
 		return compareTo((EggCartonNode)(otherNode));
+	}
+	
+	public static void main(String[] args) {
+		SimulatedAnnealing sa = new SimulatedAnnealing(getP(), T_MAX, DT);
+		System.out.println(sa.solve());
 	}
 }
