@@ -1,10 +1,11 @@
 package generalSimulatedAnnealing;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
-public interface Node extends Comparable{
+public interface Node {
 
-	public int compareTo(Object arg0); // It's simple to find the best child when I can compare them :D
+	public int compareTo(Node arg0); // It's simple to find the best child when I can compare them :D
 
 	public double getObjectiveFunction(); // This is the objective function of the nodes
 
