@@ -41,11 +41,9 @@ public class EggCartonNode implements Node, Comparable<EggCartonNode>{
 			// I generate each new neighbour by changing the state of one cell in the carton
 			for(int n=0;n<N;n++) {
 				for(int m=0;m<M;m++) {
-					System.out.println("");
 					boolean[][] newEggCarton = eggCarton;
 					newEggCarton[m][n] = !eggCarton[m][n];
 					neighbours.add(new EggCartonNode(newEggCarton));
-					System.out.println(new EggCartonNode(newEggCarton));
 				}
 			}
 		}
