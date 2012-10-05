@@ -9,7 +9,7 @@ import generalSimulatedAnnealing.SimulatedAnnealing;
 public class EggCartonNode implements Node, Comparable<EggCartonNode>{
 
 	private final int K=2, M=5, N=5, COMPARE_ROUNDING = 6;
-	private ArrayList<EggCartonNode> neighbours = null;
+	private ArrayList<EggCartonNode> neighbours = new ArrayList<EggCartonNode>();
 	private EggCartonNode bestNode = null;
 	private Double objectiveFunction = null;
 	private boolean[][] eggCarton = new boolean[M][N];
