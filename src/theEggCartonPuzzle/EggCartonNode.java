@@ -106,7 +106,7 @@ public class EggCartonNode implements Node, Comparable<EggCartonNode>{
 	@Override
 	public double getObjectiveFunction() {
 		if(objectiveFunction==null) {
-			calculateObjectiveFunction();
+			this.objectiveFunction = calculateObjectiveFunction();
 		}
 		return (double)(objectiveFunction);
 	}
