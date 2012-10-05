@@ -15,7 +15,7 @@ public class EggCartonNode implements Node, Comparable<EggCartonNode>{
 	private boolean[][] eggCarton = new boolean[M][N];
 	
 	private static final int STEPS = 1000; 				// This limits how many steps the program is willying to search.
-	private static final double T_MAX = 1, DT = T_MAX/STEPS;// This is the starting maximum temperature.
+	private final double T_MAX = 1, DT = T_MAX/STEPS;// This is the starting maximum temperature.
 	
 	public EggCartonNode() {
 		for(int n=0;n<N;n++) {	
@@ -165,8 +165,18 @@ public class EggCartonNode implements Node, Comparable<EggCartonNode>{
 	}
 	
 	public static void main(String[] args) {
-		SimulatedAnnealing sa = new SimulatedAnnealing(getP(), T_MAX, DT);
+		SimulatedAnnealing sa = new SimulatedAnnealing(getP());
 		System.out.println(sa.solve());
 		System.out.println("This is the solution found with M=" + M + ", N" + N + ", K" + K);
+	}
+
+	@Override
+	public double getDt() {
+		return DT;
+	}
+
+	@Override
+	public double gettMax() {
+		return T_MAX;
 	}
 }

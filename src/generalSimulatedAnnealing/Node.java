@@ -14,4 +14,8 @@ public interface Node {
 	public double getTarget();
 
 	public Node getRandomNeighbour();
+	
+	public double getDt();
+	
+	public double gettMax();
 }

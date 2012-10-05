@@ -6,11 +6,11 @@ public class SimulatedAnnealing {
 	private final double T_MAX, DT;
 	private Node bestFoundNode = null;
 	
-	public SimulatedAnnealing(Node P, double T_MAX, double DT) {
+	public SimulatedAnnealing(Node P) {
 		this.P = P;
 		this.bestFoundNode = P;
-		this.T_MAX = T_MAX;
-		this.DT = DT;
+		this.T_MAX = P.gettMax();
+		this.DT = P.getDt();
 	}
 	
 	public Node solve() {
@@ -27,7 +27,7 @@ public class SimulatedAnnealing {
 		double p = Math.min(1,Math.exp(-q/T));
 		double x = Math.random();
 		if(PMax.getObjectiveFunction()>=PMax.getTarget()) {
-			System.out.println("Found an optimal solution!");
+			System.out.println("Found an optimal solution! Search depth: " + (int)((P.gettMax()-T)/P.getDt()));
 			return PMax;								// If the node match the target we have found a solution and can return it
 		}
 		if(PMax.getObjectiveFunction()>bestFoundNode.getObjectiveFunction())  {
