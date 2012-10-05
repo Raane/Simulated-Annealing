@@ -8,13 +8,13 @@ import generalSimulatedAnnealing.SimulatedAnnealing;
 
 public class EggCartonNode implements Node, Comparable<EggCartonNode>{
 
-	private final static int K=2, M=5, N=5, COMPARE_ROUNDING = 6;
+	private final static int K=1, M=9, N=40, COMPARE_ROUNDING = 6;
 	private ArrayList<EggCartonNode> neighbours = new ArrayList<EggCartonNode>();
 	private EggCartonNode bestNode = null;
 	private Double objectiveFunction = null;
 	private boolean[][] eggCarton = new boolean[M][N];
 	
-	private static final int STEPS = 1000; 				// This limits how many steps the program is willying to search.
+	private static final int STEPS = 1700; 				// This limits how many steps the program is willying to search.
 	private final double T_MAX = 1, DT = T_MAX/STEPS;// This is the starting maximum temperature.
 	
 	public EggCartonNode() {
@@ -82,9 +82,9 @@ public class EggCartonNode implements Node, Comparable<EggCartonNode>{
 			if(numberOfEggsInRow>K) numberOfErrors += numberOfEggsInRow-K;
 		}
 		//Vertical error count
-		for(int m=0;m<N;m++) {
+		for(int m=0;m<M;m++) {
 			int numberOfEggsInCol = 0;
-			for(int n=0;n<M;n++) {
+			for(int n=0;n<N;n++) {
 				if(eggCarton[m][n])numberOfEggsInCol++;
 			}
 			if(numberOfEggsInCol>K) numberOfErrors += numberOfEggsInCol-K;
@@ -151,15 +151,15 @@ public class EggCartonNode implements Node, Comparable<EggCartonNode>{
 	@Override
 	public String toString() {
 		String carton = "+ ";
-		for(int m=0;m<M;m++) carton += "- ";
+		for(int n=0;n<N;n++) carton += "- ";
 		carton += "+" + System.getProperty("line.separator");
-		for(int n=0;n<N;n++) {
+		for(int m=0;m<M;m++) {
 			carton += "| ";
-			for(int m=0;m<M;m++) carton+= (eggCarton[m][n])?"O ":"' ";
+			for(int n=0;n<N;n++) carton+= (eggCarton[m][n])?"O ":"' ";
 			carton += "|" + System.getProperty("line.separator");
 		}
 		carton += "+ ";
-		for(int m=0;m<M;m++) carton += "- ";
+		for(int n=0;n<N;n++) carton += "- ";
 		carton += "+";
 		return carton;
 	}
@@ -167,7 +167,7 @@ public class EggCartonNode implements Node, Comparable<EggCartonNode>{
 	public static void main(String[] args) {
 		SimulatedAnnealing sa = new SimulatedAnnealing(getP());
 		System.out.println(sa.solve());
-		System.out.println("This is the solution found with M=" + M + ", N" + N + ", K" + K);
+		System.out.println("This is the solution found with M=" + M + ", N=" + N + ", K=" + K);
 	}
 
 	@Override
