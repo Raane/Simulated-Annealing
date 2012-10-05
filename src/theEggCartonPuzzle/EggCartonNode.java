@@ -8,7 +8,7 @@ import generalSimulatedAnnealing.SimulatedAnnealing;
 
 public class EggCartonNode implements Node, Comparable<EggCartonNode>{
 
-	private final int K=2, M=5, N=5, COMPARE_ROUNDING = 6;
+	private final static int K=2, M=5, N=5, COMPARE_ROUNDING = 6;
 	private ArrayList<EggCartonNode> neighbours = new ArrayList<EggCartonNode>();
 	private EggCartonNode bestNode = null;
 	private Double objectiveFunction = null;
@@ -85,7 +85,7 @@ public class EggCartonNode implements Node, Comparable<EggCartonNode>{
 		for(int m=0;m<N;m++) {
 			int numberOfEggsInCol = 0;
 			for(int n=0;n<M;n++) {
-				if(eggCarton[n][n])numberOfEggsInCol++;
+				if(eggCarton[m][n])numberOfEggsInCol++;
 			}
 			if(numberOfEggsInCol>K) numberOfErrors += numberOfEggsInCol-K;
 		}
@@ -104,8 +104,7 @@ public class EggCartonNode implements Node, Comparable<EggCartonNode>{
 		
 		double errorReductionCoefficient = 1/getTarget();		// This determine how much the score is reduces from one error.
 		double wrongNumberOfEggsCoefficient = 1;	// This determine how much the score is reduces from each missing or extra egg.
-		
-		return 1 - /*(Math.abs(numberOfEggs-getTarget())*wrongNumberOfEggsCoefficient*/+numberOfErrors*errorReductionCoefficient;
+		return getTarget() - (Math.abs(numberOfEggs-getTarget())*wrongNumberOfEggsCoefficient+numberOfErrors*errorReductionCoefficient);
 	}	
 	
 	public static EggCartonNode getP() { // This generates a startingpoint for SA
@@ -168,5 +167,6 @@ public class EggCartonNode implements Node, Comparable<EggCartonNode>{
 	public static void main(String[] args) {
 		SimulatedAnnealing sa = new SimulatedAnnealing(getP(), T_MAX, DT);
 		System.out.println(sa.solve());
+		System.out.println("This is the solution found with M=" + M + ", N" + N + ", K" + K);
 	}
 }

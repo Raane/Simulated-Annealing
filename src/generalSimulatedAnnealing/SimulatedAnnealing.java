@@ -34,7 +34,7 @@ public class SimulatedAnnealing {
 			bestFoundNode = PMax;	// If this node is the best until now we save it
 		}
 		if(T<0) {
-			System.out.println("Temperature hit 0 without finding and optimal solution. Best is F(P)=" + bestFoundNode.getObjectiveFunction());
+			System.out.println("Temperature hit 0 without finding and optimal solution. F(Target)=" + bestFoundNode.getTarget() + " My best solution was is F(P)=" + bestFoundNode.getObjectiveFunction());
 			return bestFoundNode;																// If T<0 we end the search and return the best we have found until now
 		}
 		if(x>p) {
