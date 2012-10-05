@@ -14,7 +14,7 @@ public class EggCartonNode implements Node, Comparable<EggCartonNode>{
 	private Double objectiveFunction = null;
 	private boolean[][] eggCarton = new boolean[M][N];
 	
-	private static final int STEPS = 100; 				// This limits how many steps the program is willying to search.
+	private static final int STEPS = 1000; 				// This limits how many steps the program is willying to search.
 	private static final double T_MAX = 1, DT = T_MAX/STEPS;// This is the starting maximum temperature.
 	
 	public EggCartonNode() {
@@ -91,21 +91,21 @@ public class EggCartonNode implements Node, Comparable<EggCartonNode>{
 		}
 		// Diagonal error count
 		for(int m=0-N;m<M+N;m++) {
-			for(int i=0;i<2;i++) {
+			for(int i=-1;i<=1;i+=2) {
 				int numberOfEggsInDiag = 0;
 				for(int n=0;n<N;n++) {
-					if( n>=0 && n<N && m>=0 && m<M ) {
-						if(eggCarton[m][n])numberOfEggsInDiag++;
+					if( n>=0 && n<N && m+i*n>=0 && m+i*n<M ) {
+						if(eggCarton[m+i*n][n])numberOfEggsInDiag++;
 					}
 				}
 				if(numberOfEggsInDiag>K)numberOfErrors+=numberOfEggsInDiag-K;
 			}
 		}
 		
-		double errorReductionCoefficient = 0.5;		// This determine how much the score is reduces from one error.
+		double errorReductionCoefficient = 1/getTarget();		// This determine how much the score is reduces from one error.
 		double wrongNumberOfEggsCoefficient = 1;	// This determine how much the score is reduces from each missing or extra egg.
 		
-		return 1 - (Math.abs(numberOfEggs-getTarget())*wrongNumberOfEggsCoefficient+numberOfErrors*errorReductionCoefficient);
+		return 1 - /*(Math.abs(numberOfEggs-getTarget())*wrongNumberOfEggsCoefficient*/+numberOfErrors*errorReductionCoefficient;
 	}	
 	
 	public static EggCartonNode getP() { // This generates a startingpoint for SA
