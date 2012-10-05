@@ -26,8 +26,12 @@ public class SimulatedAnnealing {
 		double q = (PMax.getObjectiveFunction()-fp)/2;
 		double p = Math.min(1,Math.exp(-q/T));
 		double x = Math.random();
+		//System.out.println(PMax);
+		//System.out.println(PMax.getObjectiveFunction());
 		if(PMax.getObjectiveFunction()>=PMax.getTarget()) return PMax;								// If the node match the target we have found a solution and can return it
-		if(PMax.getObjectiveFunction()>bestFoundNode.getObjectiveFunction()) bestFoundNode = PMax;	// If this node is the best until now we save it
+		if(PMax.getObjectiveFunction()>bestFoundNode.getObjectiveFunction())  {
+			bestFoundNode = PMax;	// If this node is the best until now we save it
+		}
 		if(T<0) return bestFoundNode;																// If T<0 we end the search and return the best we have found until now
 		if(x>p) {
 			return solve(PMax, T-DT);																// Exploition
