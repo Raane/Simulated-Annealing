@@ -36,7 +36,7 @@ public class EggCartonNode implements Node, Comparable<EggCartonNode>{
 	}
 
 	private ArrayList<EggCartonNode> getNeighbours() {
-		if(neighbours==null) { // If the neighbours is not generated yet, we must do so.
+		if(neighbours.size()==0) { // If the neighbours is not generated yet, we must do so.
 			
 			// I generate each new neighbour by changing the state of one cell in the carton
 			for(int n=0;n<N;n++) {
@@ -113,7 +113,9 @@ public class EggCartonNode implements Node, Comparable<EggCartonNode>{
 
 	@Override
 	public Node getBestNeighbour() {
-		if(bestNode==null) {
+		System.out.println(this.toString());
+		ArrayList<EggCartonNode> neighbours = getNeighbours();
+		if(bestNode==null && neighbours.size()!=0) {
 			bestNode = Collections.max(getNeighbours());  
 		}
 		return bestNode;
@@ -141,16 +143,16 @@ public class EggCartonNode implements Node, Comparable<EggCartonNode>{
 	
 	@Override
 	public String toString() {
-		String carton = "+";
-		for(int m=0;m<M;m++) carton += "-";
-		carton += "+";
+		String carton = "+ ";
+		for(int m=0;m<M;m++) carton += "- ";
+		carton += "+" + System.getProperty("line.separator");
 		for(int n=0;n<N;n++) {
-			carton += "| " + System.getProperty("line.separator");
-			for(int m=0;m<M;m++) carton+= (eggCarton[m][n])?"o ":"x ";
-			carton += "|";
+			carton += "| ";
+			for(int m=0;m<M;m++) carton+= (eggCarton[m][n])?"O ":"' ";
+			carton += "|" + System.getProperty("line.separator");
 		}
-		carton = "+";
-		for(int m=0;m<M;m++) carton += "-";
+		carton += "+ ";
+		for(int m=0;m<M;m++) carton += "- ";
 		carton += "+";
 		return carton;
 	}
