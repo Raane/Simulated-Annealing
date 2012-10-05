@@ -8,13 +8,15 @@ import generalSimulatedAnnealing.SimulatedAnnealing;
 
 public class EggCartonNode implements Node, Comparable<EggCartonNode>{
 
-	private final static int K=1, M=9, N=40, COMPARE_ROUNDING = 6;
+	private final static int K=1, M=8, N=8, COMPARE_ROUNDING = 6;
 	private ArrayList<EggCartonNode> neighbours = new ArrayList<EggCartonNode>();
 	private EggCartonNode bestNode = null;
 	private Double objectiveFunction = null;
 	private boolean[][] eggCarton = new boolean[M][N];
 	
-	private static final int STEPS = 1700; 				// This limits how many steps the program is willying to search.
+	
+	// As this is solved by recursion I can't have a tiny DT, therefore the 100000/(M*N) steps.
+	private static final int STEPS = 100000/(M*N); 				// This limits how many steps the program is willying to search.
 	private final double T_MAX = 1, DT = T_MAX/STEPS;// This is the starting maximum temperature.
 	
 	public EggCartonNode() {
