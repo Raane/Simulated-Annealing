@@ -14,7 +14,7 @@ public class EggCartonNode implements Node, Comparable<EggCartonNode>{
 	private Double objectiveFunction = null;
 	private boolean[][] eggCarton = new boolean[M][N];
 	
-	private static final int STEPS = 50000; 				// This limits how many steps the program is willying to search.
+	private static final int STEPS = 100; 				// This limits how many steps the program is willying to search.
 	private static final double T_MAX = 1, DT = T_MAX/STEPS;// This is the starting maximum temperature.
 	
 	public EggCartonNode() {
@@ -41,9 +41,11 @@ public class EggCartonNode implements Node, Comparable<EggCartonNode>{
 			// I generate each new neighbour by changing the state of one cell in the carton
 			for(int n=0;n<N;n++) {
 				for(int m=0;m<M;m++) {
+					System.out.println("");
 					boolean[][] newEggCarton = eggCarton;
-					newEggCarton[m][n] = eggCarton[m][n];
+					newEggCarton[m][n] = !eggCarton[m][n];
 					neighbours.add(new EggCartonNode(newEggCarton));
+					System.out.println(new EggCartonNode(newEggCarton));
 				}
 			}
 		}
@@ -113,7 +115,6 @@ public class EggCartonNode implements Node, Comparable<EggCartonNode>{
 
 	@Override
 	public Node getBestNeighbour() {
-		System.out.println(this.toString());
 		ArrayList<EggCartonNode> neighbours = getNeighbours();
 		if(bestNode==null && neighbours.size()!=0) {
 			bestNode = Collections.max(getNeighbours());  
